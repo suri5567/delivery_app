@@ -83,5 +83,9 @@ npm test
 
 This will run the tests and show the results in the terminal.
 
+swagger docs
+use this url for swgger docs
+https://delivery-management-api.onrender.com/api-docs
+
 Deployment
-vercel
+render
