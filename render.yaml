@@ -7,8 +7,4 @@ services:
     buildCommand: "npm install"
     startCommand: "node server.js"
     autoDeploy: true
-    envVars:
-      - key: MONGO_URI
-        value: mongodb+srv://kumarsonuy6:HMsi%405567@cluster0.eqfel.mongodb.net/deliveryManagement
-      - key: PORT
-        value: 8080  # or the port number you prefer
+   
