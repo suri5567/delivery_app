@@ -1,6 +1,52 @@
 import Route from '../models/route.js';
 
-// Create a new route
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Route:
+ *       type: object
+ *       properties:
+ *         origin:
+ *           type: string
+ *           description: Starting point of the route
+ *           example: "New York"
+ *         destination:
+ *           type: string
+ *           description: Endpoint of the route
+ *           example: "Los Angeles"
+ *         distance:
+ *           type: number
+ *           description: Distance between origin and destination in kilometers
+ *           example: 4500.5
+ *       required:
+ *         - origin
+ *         - destination
+ *         - distance
+ */
+
+/**
+ * @swagger
+ * /routes:
+ *   post:
+ *     summary: Create a new route
+ *     tags: [Routes]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Route'
+ *     responses:
+ *       201:
+ *         description: Route created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Route'
+ *       400:
+ *         description: Error in route creation
+ */
 export const createRoute = async (req, res) => {
   try {
     const route = new Route(req.body);
@@ -11,7 +57,24 @@ export const createRoute = async (req, res) => {
   }
 };
 
-// Get all routes
+/**
+ * @swagger
+ * /routes:
+ *   get:
+ *     summary: Get all routes
+ *     tags: [Routes]
+ *     responses:
+ *       200:
+ *         description: List of all routes
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Route'
+ *       500:
+ *         description: Error fetching routes
+ */
 export const getAllRoutes = async (req, res) => {
   try {
     const routes = await Route.find();
@@ -21,7 +84,31 @@ export const getAllRoutes = async (req, res) => {
   }
 };
 
-// Get a route by ID
+/**
+ * @swagger
+ * /routes/{id}:
+ *   get:
+ *     summary: Get a route by ID
+ *     tags: [Routes]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Route ID
+ *     responses:
+ *       200:
+ *         description: Route details
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Route'
+ *       404:
+ *         description: Route not found
+ *       500:
+ *         description: Error fetching route
+ */
 export const getRouteById = async (req, res) => {
   try {
     const route = await Route.findById(req.params.id);
@@ -32,7 +119,37 @@ export const getRouteById = async (req, res) => {
   }
 };
 
-// Update a route
+/**
+ * @swagger
+ * /routes/{id}:
+ *   put:
+ *     summary: Update a route
+ *     tags: [Routes]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Route ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Route'
+ *     responses:
+ *       200:
+ *         description: Route updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Route'
+ *       404:
+ *         description: Route not found
+ *       400:
+ *         description: Error updating route
+ */
 export const updateRoute = async (req, res) => {
   try {
     const route = await Route.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -43,7 +160,27 @@ export const updateRoute = async (req, res) => {
   }
 };
 
-// Delete a route
+/**
+ * @swagger
+ * /routes/{id}:
+ *   delete:
+ *     summary: Delete a route
+ *     tags: [Routes]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Route ID
+ *     responses:
+ *       200:
+ *         description: Route deleted successfully
+ *       404:
+ *         description: Route not found
+ *       500:
+ *         description: Error deleting route
+ */
 export const deleteRoute = async (req, res) => {
   try {
     const route = await Route.findByIdAndDelete(req.params.id);

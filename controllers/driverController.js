@@ -1,6 +1,49 @@
 import Driver from '../models/driver.js';
 
-// Create a new driver
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Driver:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: Driver's full name
+ *         licenseNumber:
+ *           type: string
+ *           description: Driver's license number
+ *         vehicle:
+ *           type: string
+ *           description: Vehicle assigned to the driver
+ *       required:
+ *         - name
+ *         - licenseNumber
+ *         - vehicle
+ */
+
+/**
+ * @swagger
+ * /drivers:
+ *   post:
+ *     summary: Create a new driver
+ *     tags: [Drivers]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Driver'
+ *     responses:
+ *       201:
+ *         description: Driver created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Driver'
+ *       400:
+ *         description: Error in driver creation
+ */
 export const createDriver = async (req, res) => {
   try {
     const driver = new Driver(req.body);
@@ -11,7 +54,24 @@ export const createDriver = async (req, res) => {
   }
 };
 
-// Get all drivers
+/**
+ * @swagger
+ * /drivers:
+ *   get:
+ *     summary: Get all drivers
+ *     tags: [Drivers]
+ *     responses:
+ *       200:
+ *         description: List of all drivers
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Driver'
+ *       500:
+ *         description: Error fetching drivers
+ */
 export const getAllDrivers = async (req, res) => {
   try {
     const drivers = await Driver.find();
@@ -21,7 +81,31 @@ export const getAllDrivers = async (req, res) => {
   }
 };
 
-// Get a driver by ID
+/**
+ * @swagger
+ * /drivers/{id}:
+ *   get:
+ *     summary: Get a driver by ID
+ *     tags: [Drivers]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Driver ID
+ *     responses:
+ *       200:
+ *         description: Driver details
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Driver'
+ *       404:
+ *         description: Driver not found
+ *       500:
+ *         description: Error fetching driver
+ */
 export const getDriverById = async (req, res) => {
   try {
     const driver = await Driver.findById(req.params.id);
@@ -32,7 +116,37 @@ export const getDriverById = async (req, res) => {
   }
 };
 
-// Update a driver
+/**
+ * @swagger
+ * /drivers/{id}:
+ *   put:
+ *     summary: Update a driver
+ *     tags: [Drivers]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Driver ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Driver'
+ *     responses:
+ *       200:
+ *         description: Driver updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Driver'
+ *       404:
+ *         description: Driver not found
+ *       400:
+ *         description: Error updating driver
+ */
 export const updateDriver = async (req, res) => {
   try {
     const driver = await Driver.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -43,7 +157,27 @@ export const updateDriver = async (req, res) => {
   }
 };
 
-// Delete a driver
+/**
+ * @swagger
+ * /drivers/{id}:
+ *   delete:
+ *     summary: Delete a driver
+ *     tags: [Drivers]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Driver ID
+ *     responses:
+ *       200:
+ *         description: Driver deleted successfully
+ *       404:
+ *         description: Driver not found
+ *       500:
+ *         description: Error deleting driver
+ */
 export const deleteDriver = async (req, res) => {
   try {
     const driver = await Driver.findByIdAndDelete(req.params.id);
