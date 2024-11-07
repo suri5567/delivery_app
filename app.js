@@ -18,6 +18,9 @@ app.use(express.json());
 swaggerDocs(app);
 
 // Define Routes
+app.get('/', (req,res)=>{
+  res.send("Hello, Delivery Management System!");
+})
 app.use("/api/auth", authRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/drivers", driverRoutes);
