@@ -1,4 +1,4 @@
-import Driver from '../models/Driver.js';
+import Driver from '../models/driver.js';
 
 // Create a new driver
 export const createDriver = async (req, res) => {

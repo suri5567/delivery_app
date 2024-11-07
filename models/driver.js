@@ -9,4 +9,6 @@ const driverSchema = new mongoose.Schema({
   status: { type: String, enum: ['active', 'inactive'], default: 'active' },
 }, { timestamps: true });
 
-export default mongoose.model('Driver', driverSchema);
+const Driver = mongoose.models.Driver || mongoose.model('Driver', driverSchema);
+
+export default Driver;

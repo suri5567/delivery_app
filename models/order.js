@@ -8,4 +8,6 @@ const orderSchema = new mongoose.Schema({
   totalAmount: { type: Number, required: true },
 }, { timestamps: true });
 
-export default mongoose.model('Order', orderSchema);
+const Order = mongoose.models.Order || mongoose.model('Order', orderSchema);
+
+export default Order;
