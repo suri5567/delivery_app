@@ -11,7 +11,7 @@ const swaggerOptions = {
     },
     servers: [{ url: 'http://localhost:8080' }],
   },
-  apis: ['./routes/*.js'], // Adjust this path based on file location
+  apis: ['./routes/*.js'], 
 };
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);

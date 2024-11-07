@@ -11,8 +11,8 @@ import swaggerDocs from "./swagger.js";
 dotenv.config();
 
 const app = express();
-app.use(cors()); // Enable CORS
-app.use(express.json()); // Parse JSON bodies
+app.use(cors()); 
+app.use(express.json()); 
 
 // Initialize Swagger Documentation
 swaggerDocs(app);

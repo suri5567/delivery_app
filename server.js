@@ -7,13 +7,11 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
 
-// Check if MONGO_URI is present
 if (!MONGO_URI) {
   console.error("MongoDB URI is missing in the environment variables.");
   process.exit(1);
 }
 
-// Connect to MongoDB and start the server
 mongoose
   .connect(MONGO_URI)
   .then(() => {
