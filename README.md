@@ -1,6 +1,6 @@
 Delivery Management System
 Overview
-The Delivery Management System is a full-stack application designed to streamline the management of deliveries. This system allows the creation of orders, management of drivers, routes, payments, and much more. With features like tracking, order assignment, and payment management, this app aims to provide a complete solution for delivery companies.
+The Delivery Management System is a full-stack application designed to streamline the management of deliveries.
 
 Features
 Order Management: Create, update, view, and delete orders.
@@ -17,30 +17,10 @@ Authentication: JWT (JSON Web Tokens)
 Testing: Jest, Supertest
 Version Control: Git
 
+start project  
 
-Installation
-
-Prerequisites
-Node.js (>= 16.x)
-MongoDB (local or cloud instance, such as MongoDB Atlas)
-Git
-
-Steps
-Clone the Repository
-
-First, clone this repository to your local machine using Git:
-
-bash
-Copy code
-git clone https://github.com/suri5567/delivery_app.git
 cd delivery-management-system
-Install Backend Dependencies
 
-Navigate to the backend folder and install the required dependencies:
-
-bash
-Copy code
-cd delivery-management-system
 npm install
 Configure Environment Variables
 
@@ -55,7 +35,6 @@ Start the Development Server
 
 In one terminal window, start the backend server:
 
-cd delivery-management-system
 npm start
 
 
@@ -101,6 +80,7 @@ Testing
 The project uses Jest and Supertest for unit and integration testing. To run the tests, you can use the following command:
 
 npm test
+
 This will run the tests and show the results in the terminal.
 
 Deployment
