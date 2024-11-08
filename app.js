@@ -7,12 +7,14 @@ import driverRoutes from "./routes/driverRoutes.js";
 import routeRoutes from "./routes/routeRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import swaggerDocs from "./swagger.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
 const app = express();
 app.use(cors()); 
 app.use(express.json()); 
+app.use(cookieParser()); 
 
 // Initialize Swagger Documentation
 swaggerDocs(app);
