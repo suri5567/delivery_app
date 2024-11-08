@@ -2,7 +2,39 @@ import User from "../models/user.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-// Register new user
+/**
+ * @swagger
+ * /register:
+ *   post:
+ *     summary: Register a new user
+ *     description: Register a new user by providing name, email, password, and role.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: John Doe
+ *               email:
+ *                 type: string
+ *                 example: user@example.com
+ *               password:
+ *                 type: string
+ *                 example: password123
+ *               role:
+ *                 type: string
+ *                 example: user
+ *     responses:
+ *       201:
+ *         description: User successfully registered
+ *       400:
+ *         description: Invalid input data or server error
+ *       500:
+ *         description: Internal server error
+ */
 export const register = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
@@ -18,7 +50,35 @@ export const register = async (req, res) => {
   }
 };
 
-// Login user
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     summary: Login a user
+ *     description: Authenticate a user with email and password, and return a JWT token.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: user@example.com
+ *               password:
+ *                 type: string
+ *                 example: password123
+ *     responses:
+ *       200:
+ *         description: Login successful, returns a message and a token
+ *       400:
+ *         description: Invalid credentials or missing fields
+ *       401:
+ *         description: Unauthorized access due to invalid credentials
+ *       500:
+ *         description: Internal server error
+ */
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -34,15 +94,18 @@ export const login = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
+
+    // Generate JWT token
     const token = jwt.sign(
       { id: user._id, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
 
+    // Set cookie with token
     res.cookie("access_token", token, {
-      maxAge: 3600000
-    })
+      maxAge: 3600000,
+    });
 
     res.status(200).json({ message: "Login successfully!" });
   } catch (error) {
